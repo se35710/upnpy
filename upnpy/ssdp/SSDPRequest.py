@@ -11,7 +11,7 @@ class SSDPRequest(SSDPHeader):
         :param method: SSDP request method [M-SEARCH or NOTIFY]
     """
 
-    def __init__(self, ssdp_mcast_addr='239.255.255.250', ssdp_port=1900, **headers):
+    def __init__(self, ssdp_mcast_addr='::ffff:239.255.255.250', ssdp_port=1900, **headers):
         super().__init__(**headers)
 
         self.SSDP_MCAST_ADDR = ssdp_mcast_addr
@@ -19,7 +19,7 @@ class SSDPRequest(SSDPHeader):
 
         self.set_header('HOST', f'{self.SSDP_MCAST_ADDR}:{self.SSDP_PORT}')
 
-        self.socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        self.socket = socket.socket(socket.AF_INET6, socket.SOCK_DGRAM)
 
     def m_search(self, discover_delay=2, st='ssdp:all', **headers):
 
