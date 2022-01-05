@@ -11,8 +11,8 @@ class UPnP:
         A UPnP object used for device discovery
     """
 
-    def __init__(self):
-        self.ssdp = SSDPRequest()
+    def __init__(self, ssdp_mcast_addr='::ffff:239.255.255.250', ssdp_port=1900):
+        self.ssdp = SSDPRequest(ssdp_mcast_addr, ssdp_port)
         self.discovered_devices = []
 
     def discover(self, delay=2, **headers):
